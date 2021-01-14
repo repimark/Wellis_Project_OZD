@@ -1,0 +1,411 @@
+INSERT INTO `dolgozok` (`d_id`, `d_nev`, `a_id`, `t_id`, `p_id`) VALUES (NULL, 'a', '', '', '')
+LELTÁR ÉS OKTATÁS
+	LELTÁROS
+		Szabóné Drjenovszky Anikó
+		Kónyáné Bilicska Andrea
+		Batuskáné Surman Andrea
+
+ELŐKÉSZÍTŐ
+	VEZETŐ
+		Ferencz Brigitta
+	MEGBÍZOTT VEZETŐ
+		Nyíri András Gyula
+	KÉSZLET KONTROLLER
+		Stiaszni Viktor
+	ADMIN
+		Lacházi Melinda
+	ELŐGYÁRTÁS
+		Nádori Péter
+		Mendi Gyula Lórántné
+		Bozsik Enikő 
+		Gazsi Henrietta
+		Bánfi Ernőné
+		Balog Klára
+		Márkus Anna
+		Czibula Tibor
+		Sallai Jánosné
+		Szilágyi Panni
+		Sponga Gáborné
+		Zsabka Erzsébet Krisztina
+		Schleicher Istvánné
+		Lakatos Tamásné
+		Petrikné Oláh Márta
+		Szekeresné Király Gyöngyi 11.02.
+		Rafael Ágoston 10.12.
+		Szabó József Sándor 
+		Bálint Márk 
+		Lisócki Norbert Zakariás 
+		Mohácsi Kálmán
+		Bene Cintia
+		Gál Levente
+		Mohácsi József
+	SORTÖLTÉS
+		Gombkötő Csaba
+
+SWIM SPA
+	Vezető
+		Kálózi Kitti
+	Szerelő
+		Udvaros Edina 	
+		Kovács Mónika
+		Durai Tamás
+		Babos Tamás
+		Juhász László
+	WM
+		Hideghéti Anita
+		Durai László
+	elektromos
+		Mezsgyán Richárd
+		
+	burkolás
+	 	Somogyi László Junior
+		Opóczki Tamás
+		Parancs Dániel
+		
+	csomagolás
+	 	Domonkos Gabriella Petra
+		Lakatos Helga
+	FRP
+		Pál Teréz
+		Horváth Teréz	
+		Orosz Ella
+		Nyitrai Rozália
+		Bíró Nóra
+	fúró
+		Vörös Kálmán
+		Rizmajer Richárd
+		Csürge Zoltán
+	targoncás/kézi anyagmozgató
+		Rézműves Márk
+	vákuum
+		Fejes Gergő
+		Szabó Norbert
+	előkészítő
+		Sponga Gáborné
+BURKOLÁS, CSOMAGOLÁS
+	VEZETŐ
+		Szobota Miklós
+	BURK-CSOM VEZETŐ
+		Kecskés János
+	SAROK GYÁRTÁS	
+		Bólya István
+	BURKOLÁS
+		Buzás Attila
+		Bor Gábor Károly
+		Fórizs Olivér
+		Fekete Sándor
+		Szebényi Zsolt
+		Petrok János Viktor
+		Fazakas Mihály
+		Oláh Arnold
+		Hajdu Dániel
+		Kurunczi Renátó
+		Laczkó Sándor
+		Rutterschmidt Zoltánné
+		Nagy Rudolf
+		Kökény József
+		Csébi Róbert István
+		Horváth Sándor
+
+	CSOMAGOLÁS
+		Keresztény Flóra
+		Farkas István Gáborné
+		Balog Marianna
+		Krizsán Károlyné
+		Gulyás Olívia Odett ???
+		Pupos Ildikó ???
+		Deli Nóra
+		Lánczos Ferencné
+		Rutterschmidt Zoltánné
+		Theil Viktória
+		Jakab Éva
+		Major Hajnalka
+		Pölcz Tiborné Hajnalka
+		
+		
+		Kökény Szabina
+		Vargáné Varga Anita
+		Kovács Alíz
+	TAKARÍTÓK
+		Szluka Attiláné Erika
+		Nagy Péterné 10.12.
+		
+		
+	ANYAG-MOZGATÁS, PÁNTOLÁS
+		Molnár Nanda Mercedesz
+		Andó Gábor 10.12.
+		Rézműves Márk
+		Ódór Balázs
+		Lakatos Venczel József
+		Balogh Mónika
+MEO
+	Sorközi ellenőrzés
+		Tukacs Vanda
+		Rostné Butnaru Luminita
+		Oláh Dániel
+		Domonyi Sándor
+		Tóth László Mihályné
+	Csomagolás ellenőrzés
+		Polyák Mónika
+		Szabó Nikolett
+		Újvári Izabella
+		Ménich Adrienn Katalin
+	Test ellenőrzés
+		Belinszki Anita Julianna
+		Márton Piroska
+		Rigó Beatrix
+		Hajdúné Pethő Zsuzsanna 10.12.
+		Kohán Szilvia
+		Harmatiné Gazsik Éva
+		Harazin Anett
+		Juhász Judit
+	Swim spa ellenőrzés
+		Volenszki Anett
+		Kocsis Brigitta
+	Extruder - Tető ellenőrzés
+		Herczéné Szapek Emese
+	Kád
+		Dinnyés Csaba
+	Vég MEO
+		Bravik Erika Zsuzsanna
+		Géró László Ferencné
+		Fentor János Ádám
+		Bednárik Erzsébet
+		Fentor Dominik János
+		Aszódiné Csorba Edina
+		Márton Viktória
+		Rafael Alexandra Erzsébet
+		Makai Andrea
+	Puffer
+		Miskolcziné Kőszegi Klára
+		Csikósné Szabó Mónik
+		Kovácsné Pálesz Nikolett (kismama) 11.13.
+	PORSZÍVÓ
+		Peregovits Kálmánné
+		Garajszki Mária
+		Lajter Lászlóné
+		Varga János
+		Szabó Róbert
+	MEO ELEKTROMOS
+		Varsányi Tamás
+		Surányi Zsolt
+		Koleff Sándor Miklós
+	REWORK VEZETŐ
+		Kecskés János
+	REWORK	
+		Sziklási Lilla Ildikó
+	FÉNYEZŐ
+		Urbán Krisztián
+		Rusznyák Dániel
+		Rabné Szerényi Zita
+		Mohácsi Zsolt
+		Molnár Ádám
+	Műszak vezető	
+		Ritz József
+		Szabó István
+		Mile Tamás 
+		Kajzinger Barnabás
+	Vezető	
+		Mihalics József
+	PU 	
+		Kanyik Bence
+		Lengyel Bence
+		Nagy Roland Zsolt
+		Rózsahegyi Elemér
+		Rukrigel Zsolt
+		Kovács Árpád
+		Wágenhoffer Róbert
+		Podoba Dávid
+		Csinos Attila
+		Balogh István
+		Kiss Gusztáv 
+		Harkai Zoltán 
+	FÚRÓ ROBOT 
+		Schneider Gábor
+		Szabó József
+		Józsa Dániel
+		Dóczi István
+		Czinege Gábor
+		Szalai Xavér
+		Schneider János 10.12.
+	VÁGÓ 	
+		Sztratyinszky Márk
+		Balogh Krisztián 
+		Lakatos Tamás 
+		Garas Tamás
+	VÁKUUM 	
+		Wirt Gábor
+		Márton Zoltán
+		Csikós János Tamás
+		Farkas László
+		Péter Márton
+		Litóczki József Krisztián
+		Péter Zoltán 
+		Csonka János 
+		Balogh Ádám 
+		Csikós Tóbiás 
+		Domján Imre 
+	TÁLCA VÁKUUM 	
+		Slezák József
+		Ónódi András
+	KÉZI FÚRÓ 
+		Kiss Róbert Ferencz
+		Kovács Tamás
+		Balogh László
+		Pekker István
+		Jónás Miklós
+		Halenkár Károly
+		Schrick Ferenc György
+		Szabó Péter
+		Szente László 
+		Lingurár György
+		Lakatos László
+		Mráz István
+		Török Péter
+		Lövei Csaba
+		Turányi László
+		Németh Izsák Krisztián 
+		Varga Bálint
+		Katona József 
+		Vadász Benedek
+		Kovács Máté Péter
+		Nagy Richárd László 
+		Balogh Antal András
+		Fehér József
+		Nagy István Zoltán
+	Fúró - Javítós	
+		Kovács Attila
+	Fúró - Oktató	
+		Tusor Péter
+	FELRAKÓ 
+		Balogh Bence
+		Nagy Károly
+		Kecskeméti Lajos (meo)
+		Ajtai Sándor
+		Farkas András Imre
+		Kolompár András
+		Kolompár Ferenc
+		Kozma Gábor
+		Makula János Dávid
+		Makula Norbert
+		Makula Gusztáv
+		Mező Attila
+		Balogh Tivadar
+		Kovács Kálmán
+		Nagy János Csaba (meo)
+		Nagy Krisztián Zsolt
+		Nagy József Levente
+		Nagy András
+		Balogh Tamás
+		Mátyás Szebasztián
+	LAPSZABÁSZAT (4)	
+		Demeter Dávid
+		Bábel Benjámin
+		Halfinger József
+		Karlik László
+	KERET SZABÁSZAT (4)	
+		Horváth Lajos
+		Tinca Levente
+		Györe Béla
+		Rottenberg  Tamás 
+	KERETEZÉS (12)	
+		Fekete János
+		Kaszás Péter Sebestyén
+		Szilveszter Imre
+		Németh András
+		
+		Lánczos Zsolt
+		Szennai István
+		Andaházy Krisztián
+		Rafael Pál
+		Sári Noémi Klára
+		Ivanics Tamás 
+		Kovács József
+	BURKOLAT KÉSZÍTŐ (6)	
+		Medve Pál
+		Avacz Tamás 
+		Györfi Imre
+		Dohány József 10.12.
+	SZIGETELŐ (4)	
+		Farkas Tamásné
+		Botlik Angéla
+		Herpai Szilvia
+	SAROK GYÁRTÁS (4)	
+		Vellai Edit
+	ElŐKÉSZÍTŐ (2)	
+		Fazekas Dávid
+		Parászka Péter
+	DÍSZKERETEZÉS	
+		Vitárizs Dávid
+	HUNGAROCELL 
+		Petrik Amanda
+		Málinger Richárdné
+		Lánczosné Zelenák Regina
+		Klein Mónika
+		Balogh Tiborné
+	SZABÁSZAT (6)	
+		Lukácsi Judit
+		Bálint Gabriella
+		Böcsödi Barbara
+		Tóthegyi Tímea
+		Fabula Mária
+		Balog Nikolett
+	VARRODA (17+1 = 17 varr, 1 munkaosztó)	
+		Kondor Tiborné
+		Nagyné Fogarasi Ágnes
+		Szaller Brigitta
+		Kabai Irén
+		Farcas Claudia Tereza
+		Lingvai Attiláné
+		Haraszti Krisztina
+		Tyukodi Mária
+		Hideghétiné Garai Margit Aranka
+		Somogyi Márta
+		Józsa Lászlóné
+		Sághi Anikó
+		Karácsony Sándorné
+		Üröginé Nagy Anna
+		Polczer Gabriella
+		Volter Mária
+		Jugovitsné Pakó Katalin
+		Horváthné Kátai Kinga
+	SZITÁZÓ (1)	
+		Mráz Mária
+	TÖMÉSZET (8)	
+		Sánta Beatrix
+		Fehér Tibor
+		Tulecz Márk
+		Tóth Arnold
+		Nagy Bence
+		Szabó Richárd
+		Deményné Palkó Brigitta
+		Ivanics Szabolcs 
+	EXTRUDER	
+		Kovács Krisztián János
+		Rizmajer Krisztina
+		Gazsó Csaba
+		Pajor József
+		Nagy László
+		Kreisz Erik
+		Göcs Tibor
+		Bakonyiné Sipos Renáta
+		Bobric Dominik
+		Soós Zoltán
+	DOMBORNYOMÓ - SZÁLCSISZOLÓ	
+		Saláta Ferenc Kálmán
+		Mányoki Lajosné
+		Kabai Diána Vivien
+		Varga Zoltánné
+		Sándor Mercédesz 
+		Szász Katalin	
+	HEGESZTŐ 
+		Nyitrai Béla
+		Kőbányai Ferenc József
+		Ogrin Antal
+		Romanek Károly
+		Takács László
+		Bán Ferenc 
+	DARABOLÓS 
+		Vas József
+		Fehér Zoltán
+	
