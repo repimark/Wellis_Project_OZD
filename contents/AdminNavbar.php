@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="../admin/loggedIn.php"><img src="../wellislogo.png"  height="25"> Igényfelmérés <span class="badge badge-danger">Admin</span></a>
+  <a class="navbar-brand" href="../admin/loggedIn.php"><img src="../wellislogo.png"  height="25"> Igényfelmérés <span class="badge badge-danger">Admin</span> <span class="badge badge-danger">Ózd</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
