@@ -15,7 +15,7 @@
           <a class="dropdown-item" href="addUser.php">Dogozók hozzáadása</a>
           <a class="dropdown-item" href="kilepett.php">Kiléptetett Dolgozók</a>
           <a class="dropdown-item" href="osszesito.php">Összesítő</a>
-          <a class="dropdown-item" href=""><span class="badge badge-danger">Ózd</span></a>
+          <a class="dropdown-item" href="http://wellis.repitsmark.xyz"><span class="badge badge-danger">Ózd</span></a>
         </div>
       </li>
       <li class="nav-item dropdown">
