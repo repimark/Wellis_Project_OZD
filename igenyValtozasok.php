@@ -34,8 +34,8 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center brand"> Igény változások </h2>
-            <canvas id="canv1" style="background-color: white;"></canvas>
-            <canvas id="canv2" style="background-color: white;"></canvas>
+            <canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas>
+            <canvas id="canv2" class="bg-light rounded shadow mb-5"></canvas>
         </div>
         <script>
             var minus = [];
@@ -59,24 +59,24 @@ if (!isset($_SESSION["u_id"])) {
                         month: month
                     },
                     success: function(Data) {
-                        console.log(Data)
+                        //console.log(Data)
                         var obj = JSON.parse(Data);
                         for (i in obj) {
-                            //console.log(obj[i].muvelet)
+                            ////console.log(obj[i].muvelet)
 
                             if (obj[i].muvelet == "-") {
-                                //console.log(obj[i].muv)
+                                ////console.log(obj[i].muv)
                                 minus.push(obj[i].db)
                                 minusLabel.push(obj[i].pozi)
                             } else {
-                                console.log(obj[i].muvelet)
+                                //console.log(obj[i].muvelet)
                                 plus.push(obj[i].db)
                                 plusLabel.push(obj[i].pozi)
                             }
                         }
                     },
                     error: function(errorData) {
-                        console.log(errorData)
+                        //console.log(errorData)
                     }
                 });
             }

@@ -37,135 +37,83 @@ if (!isset($_SESSION["u_id"])) {
         <div class="container">
             <h2 class="text-center">Be- és Kilépett Dolgozók</h2>
             <div id="chart_cont">
-                <!-- <canvas id="canv1" width="500" height="300" style="background-color: white;"></canvas>
-                <canvas id="canv2" width="500" height="300" style="background-color: white;"></canvas> -->
-                <canvas id="canv3" width="500" height="300" style="background-color: white;"></canvas>
+                <br/>
+                <canvas id="canv3" class="bg-light rounded shadow mb-5"></canvas>
+                <br/>
+                <canvas id="canv4" class="bg-light rounded shadow mb-5"></canvas>
+                <br/>
             </div>
         </div>
         <script type="text/javascript">
-            var teruletLabel = [];
-            var belepett = [];
-            var kilepett = [];
+            var teruletLabel = []
+            var belepett = []
+            var kilepett = []
+            var hetiBelepett = []
+            var hetiKilepett = []
+            var hetiTerulet = []
             $('.container').ready(function() {
                 var datum = new Date()
                 var y = datum.getFullYear()
                 var m = datum.getMonth() + 1
-                loadDolgozok(y, m)
-                loadKilepett(y, m)
-                rajz()
+                var n = datum.getFullYear()+'.'+(datum.getMonth()+1)+'.'+datum.getDate();
+                //loadDolgozok(y, m)
+                loadHavi(n)
+                loadHeti(n)
+                
             });
-            var loadDolgozok = function(year, month) {
+            var loadHavi = function(today) {
                 $.ajax({
-                    url: "adatok/getHaviDolgozok.php",
+                    url: "adatok/getHaviValtozas.php",
                     method: "POST",
                     data: {
-                        year: year,
-                        month: month
+                        today: today
                     },
-                    dataType: "JSON",
                     success: function(data) {
-                        console.log(data)
-                        var terulet = []
-                        var adat = []
-                        for (i in data) {
-                            terulet.push(data[i].terulet)
-                            adat.push(data[i].db)
-                            belepett.push(data[i].db)
-                            teruletLabel.push(data[i].terulet)
-                            //console.log(adat[i])
+                        //console.log(data)
+                        var obj = JSON.parse(data)
+                        for (i in obj) {
+                            //teruletLabel.push(data[i].terulet)
+                            //adat.push(obj[i].db)
+                            teruletLabel.push(obj[i].terulet)
+                            belepett.push(parseInt(obj[i].belep))
+                            kilepett.push(parseInt(obj[i].kilep))
+                            
                         }
-                        var chartdata = {
-                            labels: terulet,
-                            datasets: [{
-                                label: 'A hónapban belépett dolgozók',
-                                backgroundColor: 'rgba(200,200,200,0.75)',
-                                borderColor: 'rgba(200,200,200,0.75)',
-                                hoverBackgroundColor: 'rgba(200,200,200,1)',
-                                hoverBorderColor: 'rgba(200,200,200,1)',
-                                borderWidth: 1,
-                                data: adat
-                            }, ]
-                        };
-                        // var ctx = document.getElementById('canv1').getContext('2d');
-                        // var barGraph = new Chart(ctx, {
-                        //     type: 'bar',
-                        //     data: chartdata,
-                        //     options: {
-                        //         tooltips: {
-                        //             mode: 'index',
-                        //             intersect: false,
-                        //         },
-                        //         scales: {
-                        //             y: {
-                        //                     beginAtZero: true
-                        //                 }
-                        //         }
-                        //     }
-                        // });
-
+                        hetiRajz(teruletLabel, kilepett, belepett, 'canv3', 'bar', 'Havi Kilépett Dolgozók', 'Havi Belépett Dolgozók', 'Havi Munkaerő változások (fő)')
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
                     }
                 });
             }
-            var loadKilepett = function(year, month) {
+            var loadHeti = function(today){
                 $.ajax({
-                    url: "adatok/getHaviKilepett.php",
-                    method: "POST",
+                    url: 'adatok/getHetiValtozas.php',
+                    type: 'POST',
                     data: {
-                        year: year,
-                        month: month
+                        today: today,
                     },
-                    dataType: "JSON",
-                    success: function(data) {
-                        console.log(data)
-                        var terulet = []
-                        var adat = []
-                        for (i in data) {
-                            terulet.push(data[i].terulet)
-                            adat.push(data[i].db)
-                            kilepett.push(data[i].db)
-                            //console.log(adat[i])
+                    success: function(res){
+                        var obj = JSON.parse(res)
+                        for (i in obj) {
+                            hetiBelepett.push(obj[i].belep)
+                            hetiKilepett.push(obj[i].kilep)
+                            hetiTerulet.push(obj[i].terulet)
                         }
-                        var chartdata = {
-                            labels: terulet,
-                            datasets: [{
-                                data: adat,
-                                label: 'A hónapban Kilépett dolgozók',
-                                backgroundColor: 'rgba(200,200,200,0.75)',
-                                borderColor: 'rgba(200,200,200,0.75)',
-                                hoverBackgroundColor: 'rgba(200,200,200,1.0)',
-                                hoverBorderColor: 'rgba(200,200,200,1.0)',
-                                borderWidth: 1
-                            }],
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    display: false,
-                                    position: 'top'
-                                }
-                            }
-                        };
-                        // var ctx = document.getElementById('canv2').getContext('2d');
-                        // var barGraph = new Chart(ctx, {
-                        //     type: 'bar',
-                        //     data: chartdata
-                        // })
+                        hetiRajz(hetiTerulet, hetiKilepett, hetiBelepett, 'canv4','bar', 'Heti Kilépett Dolgozók', 'Heti Belépett Dolgozók', 'Heti Munkaerő változások (fő)')
                     },
-                    error: function(error) {
-                        console.log(error)
+                    error: function(errorData){
+                        console.log(errorData)
                     }
                 });
             }
-            var rajz = function() {
-
+            
+            var hetiRajz = function(label, kilep, belep, canv ,typ, cim1, cim2 ,foCim){
                 var chartdata = {
-                    labels: teruletLabel,
+                    labels: label,
                     datasets: [{
-                            data: kilepett,
-                            label: 'Kilépett Dolgozók',
+                            data: kilep,
+                            label: cim1,
                             backgroundColor: 'rgba(255, 118, 117,1.0)',
                             borderColor: 'rgba(255, 118, 117,1.0)',
                             hoverBackgroundColor: 'rgba(200,200,200,1.0)',
@@ -173,8 +121,8 @@ if (!isset($_SESSION["u_id"])) {
                             borderWidth: 1
                         },
                         {
-                            data: belepett,
-                            label: 'Belépett Dolgozók',
+                            data: belep,
+                            label: cim2,
                             backgroundColor: 'rgba(0, 184, 148,1.0)',
                             borderColor: 'rgba(0,184,148,1.0)',
                             hoverBackgroundColor: 'rgba(0,184,148,1.0)',
@@ -191,10 +139,16 @@ if (!isset($_SESSION["u_id"])) {
                         }
                     }
                 };
-                var ctx = document.getElementById('canv3').getContext('2d');
+                var ctx = document.getElementById(canv).getContext('2d');
                 var barGraph = new Chart(ctx, {
-                    type: 'bar',
-                    data: chartdata
+                    type: typ,
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: foCim
+                        }
+                    }
                 });
             }
         </script>

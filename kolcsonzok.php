@@ -34,7 +34,7 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <h2 class="text-center brand"> Meddig maradtak az emberek </h2>
-            <div class="canvas-div "><canvas id="canv1" width="50%" class="bg-light center"></canvas></div>
+            <div class="canvas-div "><canvas id="canv1" class="bg-light rounded shadow mb-5"></canvas></div>
         </div>
         <script>
             var adat = [];
@@ -49,7 +49,7 @@ if (!isset($_SESSION["u_id"])) {
                     type: 'POST',
                     data: {},
                     success: function(Result) {
-                        console.log(Result)
+                        //console.log(Result)
                         var obj = JSON.parse(Result)
                         var lines = [];
                         adat.push(obj[0].ml)
@@ -61,12 +61,12 @@ if (!isset($_SESSION["u_id"])) {
                         rajz()
                     },
                     error: function(errorData) {
-                        console.log(errorData)
+                        //console.log(errorData)
                     }
                 });
             }
             var rajz = function() {
-                console.log(adat)
+                //console.log(adat)
                 var chartdata = {
                     labels: cim,
                     datasets: [{
@@ -90,7 +90,13 @@ if (!isset($_SESSION["u_id"])) {
                 var ctx = document.getElementById('canv1').getContext('2d');
                 var barGraph = new Chart(ctx, {
                     type: 'doughnut',
-                    data: chartdata
+                    data: chartdata,
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Kölcsönző cégek eloszlása fő/cég-ben'
+                        }
+                    }
                 });
             }
         </script>
