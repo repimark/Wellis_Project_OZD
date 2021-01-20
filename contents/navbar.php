@@ -15,7 +15,9 @@
           <a class="dropdown-item" href="addUser.php">Dogozók hozzáadása</a>
           <a class="dropdown-item" href="kilepett.php">Kiléptetett Dolgozók</a>
           <a class="dropdown-item" href="osszesito.php">Összesítő</a>
-          <a class="dropdown-item" href="http://wellis.repitsmark.xyz"><span class="badge badge-danger">Dabas</span></a>
+          <a class="dropdown-item" href="hetiIgeny.php">Igény teljesítések</a>
+          <a class="dropdown-item" href="szellemi.php">Szellemi keresések</a>
+          <!-- <a class="dropdown-item" href="http://ozdwellis.repitsmark.xyz"><span class="badge badge-danger">Ózd</span></a> -->
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -23,7 +25,7 @@
           Adatok vizualizálva
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a>
+          <!-- <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a> -->
           <a class="dropdown-item" href="meddigMaradt.php">Mikor jött / Mikor ment ?</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>

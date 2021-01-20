@@ -23,11 +23,12 @@
           Adatok vizualizálva
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a>
+          <!-- <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a> -->
           <a class="dropdown-item" href="meddigMaradt.php">Mikor jött / Mikor ment ?</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
+          <a class="dropdown-item" href="fluktuacio.php">Havi Fluktuáció</a>
         </div>
       </li>
     </ul>
