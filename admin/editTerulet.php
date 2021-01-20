@@ -152,7 +152,9 @@ if (!isset($_SESSION["a_id"])) {
   					for (i in objJSON) {
   						lines += '<li class="list-group-item" data-terulet="'+objJSON[i].t_id+'">'+objJSON[i].t_elnevezes+'   <button data-terulet="'+objJSON[i].t_id+'" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
   					}
-  					
+				},
+				error: function(errorRes){
+					alert(errorRes)
 				}
 			})
 			$('#list').html(lines)
