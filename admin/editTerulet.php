@@ -166,11 +166,11 @@ if (!isset($_SESSION["a_id"])) {
 					error: function(errorRes) {
 						console.log(errorRes)
 					}
+
 				})
-				
+				$('#list').html(lines)
 			});
 		</script>
 	</body>
-
 	</html>
 <?php } ?>
