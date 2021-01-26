@@ -400,7 +400,7 @@ if (!isset($_SESSION["u_id"])) {
 											<td colspan="2">
 												<form class="form-inline">
 													<input type="text" class="form-control" width="" name="" id="m<?php echo $rowDolgozo['m_id']; ?>" value="<?php echo $rowDolgozo['Megjegyzes']; ?>">
-													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px">
+													<button type="button" class="btn btn-secondary addMegjegyzes gomb" style="margin:2px" id="<?php echo $rowDolgozo['m_id']; ?>">
 														<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-journal-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 															<path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
 															<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
@@ -1112,6 +1112,7 @@ if (!isset($_SESSION["u_id"])) {
 				var dolgozo_id = button.data('id')
 				//console.log(dolgozo_id)
 				var belepes = button.data('belepes')
+				var sor = button.data('sor')
 				var modal = $(this)
 				modal.find('#Modaltitle').text(nev + " szerkesztése")
 				modal.find('#edit_dolgozo-nev').val(nev)
@@ -1154,28 +1155,59 @@ if (!isset($_SESSION["u_id"])) {
 				} else {
 					$('#edit_sorSel').show()
 					$.ajax({
-						url: "php/getSorok_2.php",
+						url: "php/getSorok_2.php", 
 						type: "POST",
 						cache: false,
 						data: {
-							t_id: terulet_id
+							t_id: terulet_id,
+							sor: sor
+							
 						},
 						success: function(getPozicioResult) {
 							var obj = JSON.parse(getPozicioResult);
 							var lines = [];
+							var pozik = []
 							if (obj.length > 0) {
 								for (var i = obj.length - 1; i >= 0; i--) {
-									lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
+									//lines += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + ' | ' + obj[i].s_elnevezes + '</option>'
+									if(obj[i].sid == sor){
+										lines += '<option class="" data-sor="' + obj[i].sid + '" selected>' + obj[i].selnev + '</option>'
+									}else{
+										lines += '<option class="" data-sor="' + obj[i].sid + '">' + obj[i].selnev + '</option>'
+									}
+									if(obj[i].p_id == pozicio_id)
+									{
+										pozik += '<option class="" data-id="' + obj[i].p_id + '" selected>' + obj[i].p_elnevezes + '</option>'
+									}else{
+										pozik += '<option class="" data-id="' + obj[i].p_id + '">' + obj[i].p_elnevezes + '</option>'
+									}
 								}
 							} else {
 								lines += 'Nincs még hozzárendelve pozicíó ehhez a területhez'
 							}
-							$('#edit_pozicio_select').html(lines)
+							$('#edit_sor_select').html(lines)
+							$('#edit_pozicio_select').html(pozik)
 						},
 						error: function(error) {
 							//console.log(error)
 						}
 					});
+					// $.ajax({
+					// 	url: "getPozicioForUserAdd.php",
+					// 	type: "POST",
+					// 	cache: false,
+					// 	data: {
+					// 		t_id: terulet_id,
+					// 		p_id: pozicio_id
+					// 	},
+					// 	success: function(dataResult_pozi) {
+					// 		//console.log(dataResult_pozi)
+					// 		$('#edit_pozicio_select').html(dataResult_pozi);
+					// 	},
+					// 	error: function(error) {
+					// 		//console.log(error)
+					// 	}
+					// });
 				}
 				//Állapot lekérdezése
 				$.ajax({
