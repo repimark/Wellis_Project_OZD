@@ -9,7 +9,7 @@
 	if (mysqli_num_rows($result) > 0) {
 		//echo "Sikeres";
 		$user = mysqli_fetch_row($result);
-		$_SESSION["a_id"] = (int) $user[0];
+		$_SESSION["oa_id"] = (int) $user[0];
 		$_SESSION["a_name"] = (string) $user[1];
 		header("location:../loggedIn.php");
 	}else{

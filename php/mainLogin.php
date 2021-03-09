@@ -10,7 +10,7 @@
 		$user = mysqli_fetch_row($result);
 		$_SESSION["jog"] = $user[2];
 		$_SESSION["u_name"] = $user[1];
-		$_SESSION["u_id"] = $user[0];
+		$_SESSION["ou_id"] = $user[0];
 		//$_SESSION["u_name"] = $username;
 		header("location:../index.php");
 	}else{

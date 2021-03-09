@@ -1,7 +1,7 @@
 <!-- <?php
 // Connection 
 session_start();
-if (!isset($_SESSION["u_id"])) {
+if (!isset($_SESSION["ou_id"])) {
 	header("location: login.php");
 }else{
 include '../connect.php';

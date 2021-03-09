@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION["a_id"])){
+    if(!isset($_SESSION["oa_id"])){
         header('location:../index.php');
     }else{
         include '../../connect.php';
