@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.php"><img src="wellislogo.png" height="25"> Igényfelmérés<span class="badge badge-danger">ÓZD</span></a>
+  <a class="navbar-brand" href="index.php"><img src="wellislogo.png" height="25"> Igényfelmérés</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,7 +8,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dolgozók kezelése
+          Menü
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="users.php">Dolgozók szerkesztése</a>
@@ -19,7 +19,7 @@
 
           <a class="dropdown-item" href="igenyPerPozi.php">Poziciónkénti igények</a>
           <a class="dropdown-item" href="szellemi.php"><span class="badge badge-info">Szellemi keresések</span></a>          
-
+          
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -32,9 +32,9 @@
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
           <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
-          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó és belépés  %-ba (havi)</a>
+          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó %-ban (havi)</a>
         </div>
-      </li>
+      </li> 
     </ul>
     <input id="search" class="rounded mr-sm-2" width="100" aria-label="Keresés" type="search" placeholder="Keresés"/>
     <span class="navbar-text p-1"><?php echo $_SESSION["u_name"]; ?> <a href="php/logout.php">Kijelentkezés</a></span>

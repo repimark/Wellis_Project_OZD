@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION["u_id"])) {
     header("location: login.php");
 } else {
+    $user = $_SESSION["u_name"];
 ?>
     <!DOCTYPE html>
     <html>
@@ -20,7 +21,14 @@ if (!isset($_SESSION["u_id"])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> -->
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+            .btn-2 {
+                height: 32px !important;
+                text-align: center !important;
+                vertical-align: middle;
 
+            }
+        </style>
     </head>
 
     <body>
@@ -34,7 +42,11 @@ if (!isset($_SESSION["u_id"])) {
         ?>
         <div class="container">
             <br>
-            <h2 class="text-center "> Szellemi Keresések</h2>
+            <h2 class="text-center"> Szellemi Keresések</h2>
+            <div class="bg-light w-25 rounded p-2">
+                <p>Szűrés feladóra</p>
+                <select class="form-control " id="felado"></select>
+            </div>
             <br>
             <button id="newKer" class="btn btn-dark" data-toggle="modal" data-target="#addModal"><span class="badge badge-success">+</span> Új keresés hozzáadása</button> 
             <div class="accordion" id="accordionExample">
@@ -60,6 +72,7 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
                                         <th>Eredmény</th>
+                                        <th>Feladó</th>
                                         <th>Műveletek</th>
                                     </tr>
                                 </thead>
@@ -90,7 +103,9 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés határideje (45 nap)</th>
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
+                                        <th>Feladó</th>
                                         <th>Eredmény</th>
+                                        <th>Művelet</th>
                                     </tr>
                                 </thead>
                                 <tbody id="kesz">
@@ -120,7 +135,9 @@ if (!isset($_SESSION["u_id"])) {
                                         <th>Keresés határideje (45 nap)</th>
                                         <th>Keresés lezárása (dátum)</th>
                                         <th>Eltelt idő (nap)</th>
+                                        <th>Feladó</th>
                                         <th>Eredmény</th>
+                                        <th>Művelet</th>
                                     </tr>
                                 </thead>
                                 <tbody id="lejart">
@@ -164,12 +181,94 @@ if (!isset($_SESSION["u_id"])) {
             </div>
             <br>
         </div>
+        <div class="modal" id="editModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="#editPozi">Pozicíó</label>
+                        <input type="text" id="editPozi" class="form-control">
+                        <label for="#editDate">Feladás dátuma</label>
+                        <input type="text" id="editDate" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezár</button>
+                        <button type="button" class="btn btn-primary" id="editBtn">Mentés</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             $(document).ready(function() {
                 loadKereses()
                 chartLoad()
-
+                getFelado()
             });
+            $('#felado').change(function() {
+                var felado = $('#felado :selected').val()
+                var aktiv = []
+                var kesz = []
+                var lejart = []
+
+                //alert(felado)
+                $.ajax({
+                    url: 'szellemi/szures/sortByUser.php',
+                    type: 'POST',
+                    data: {
+                        felado: felado
+                    },
+                    success: function(res) {
+                        var obj = JSON.parse(res)
+
+                        for (i in obj) {
+                            if (parseInt(obj[i].allapot) == 0) {
+                                if (hatarIdoDatum(obj[i].kezdDatum) > 45) {
+                                    var d = new Date()
+                                    var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
+                                    lejartraJelent(obj[i].k_id, today)
+                                } else {
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-2 btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger btn-2 w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
+                                }
+                            } else if (parseInt(obj[i].allapot) == 1) {
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum))) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td><td><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button></td></tr>'
+                            } else {
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
+                            }
+                        }
+                        $('#aktiv').html(aktiv)
+                        $('#kesz').html(kesz)
+                        $('#lejart').html(lejart)
+                    },
+                    error: function(errorRes) {
+                        alert(errorRes)
+                    }
+                })
+            })
+            var getFelado = function() {
+                $.ajax({
+                    url: 'szellemi/szures/getUsers.php',
+                    type: 'POST',
+
+                    success: function(res) {
+                        //alert(res)
+                        var lines = []
+                        lines += '<option></option>'
+                        var obj = JSON.parse(res)
+                        for (i in obj) {
+                            lines += '<option>' + obj[i].felado + '</option>'
+                        }
+                        $('#felado').html(lines)
+                    },
+                    error: function(errorRes) {
+                        alert(errorRes)
+                    }
+                })
+            }
             $('#addModal').on('show.bs.modal', function() {
                 loadTerulet()
             });
@@ -195,24 +294,27 @@ if (!isset($_SESSION["u_id"])) {
                 var d = $('#kezdDatum').val()
                 var p = $('#pozicio').val()
                 var t = $('#terulet :selected').data('id')
+                var felado = '<?php echo $_SESSION["u_name"]; ?>'
 
-                addKereses(t, p, d)
+                addKereses(t, p, d, felado)
 
             });
-            var addKereses = function(ter, pozi, datum) {
+            var addKereses = function(ter, pozi, datum, felado) {
                 $.ajax({
                     url: 'szellemi/addKereses.php',
                     type: 'POST',
                     data: {
                         terulet: ter,
                         pozi: pozi,
-                        kDatum: datum
+                        kDatum: datum,
+                        felado: felado
                     },
                     success: function(res) {
+                        //alert(res)
                         location.reload()
                     },
                     error: function(errorRes) {
-
+                        alert(errorRes)
                     }
                 });
             }
@@ -236,12 +338,12 @@ if (!isset($_SESSION["u_id"])) {
                                     var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                                     lejartraJelent(obj[i].k_id, today)
                                 } else {
-                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Készre jelent</button>' + '</td></tr>'
+                                    aktiv += '<tr><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + 'Aktív' + '</td><td>' + obj[i].felado + '</td><td>' + '<button type="button" class="keszVege btn btn-2 btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger btn-2 w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
                                 }
                             } else if (parseInt(obj[i].allapot) == 1) {
-                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum)) + '</td><td>' + 'Sikeres' + '</td></tr>'
+                                kesz += '<tr class="bg-success"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(parseInt(elteltIdo(obj[i].kezdDatum, obj[i].keszDatum))) + '</td><td>' + obj[i].felado + '</td><td>' + 'Sikeres' + '</td><td><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button></td></tr>'
                             } else {
-                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + hatarIdoDatum(obj[i].kezdDatum) + '</td><td>' + 'Aktív' + '</td></tr>'
+                                lejart += '<tr class="bg-danger"><td>' + obj[i].terulet + '</td><td>' + obj[i].pozicio + '</td><td>' + obj[i].kezdDatum + '</td><td>' + '45' + '</td><td>' + obj[i].keszDatum + '</td><td>' + Math.round(hatarIdoDatum(obj[i].kezdDatum)) + '</td><td>' + obj[i].felado + '</td><td>' + 'Aktív' + '</td><td>' + '<button type="button" class="keszVege btn btn-success w-100" onClick="keszreJelent(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Kész</button><button type="button" class="btn btn-danger w-100" onClick="keresesTorlese(' + obj[i].k_id + ')" data-id="' + obj[i].k_id + '">Mégse</button><button type="button" class="btn btn-info btn-2 w-100" onClick="keresesSzerk(' + obj[i].k_id + ' , `' + String(obj[i].pozicio) + '` , `' + obj[i].kezdDatum + '`)" data-id="' + obj[i].k_id + '">Szerkeszt</button>' + '</td></tr>'
                             }
                         }
                         $('#aktiv').html(aktiv)
@@ -268,7 +370,6 @@ if (!isset($_SESSION["u_id"])) {
                 })
             }
             var keszreJelent = function(id) {
-                //alert('megy ' + id )
                 var d = new Date()
                 var today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate()
                 $.ajax({
@@ -286,6 +387,51 @@ if (!isset($_SESSION["u_id"])) {
                     }
                 })
             }
+            var keresesTorlese = function(id) {
+                $.ajax({
+                    url: 'szellemi/deleteKeres.php',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function(res) {
+                        location.reload()
+                    },
+                    error: function(errRes) {
+                        alert(errorRes)
+                    }
+                })
+            }
+            var keresesSzerk = function(id, pozi, datum) {
+                //alert('szerk ' + id)
+                $('#editModal').modal('show')
+                $('#editPozi').val(pozi)
+                $('#editDate').val(datum)
+                $('#editBtn').attr('data-id', id)
+            }
+            $('#editBtn').click(function(){
+                var id = $(this).data('id')
+                var pozi = $('#editPozi').val()
+                var datum = $('#editDate').val()
+                //alert( id + ':id , ' + pozi + ':pozi , ' + datum + ':datum')
+                $.ajax({
+                    url: 'szellemi/editSzellemi.php',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        pozi: pozi,
+                        datum: datum
+                    },
+                    success: function(res){
+                        console.log(res);
+                        location.reload();
+                        //alert(res)
+                    },
+                    error: function(errorRes){
+                        console.log(errorRes)
+                    }
+                })
+            })
             var hatarIdoDatum = function(kezdes) {
                 var d = new Date(kezdes)
                 //console.log(d.getFullYear() + '.' + (d.getMonth()+1)+'.'+d.getDate())

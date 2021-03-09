@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="index.php"><img src="wellislogo.png" height="25"> Igényfelmérés <span class="badge badge-danger">Ózd</span></a>
+  <a class="navbar-brand" href="index.php"><img src="wellislogo.png" height="25"> Igényfelmérés</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,14 +8,14 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dolgozók kezelése
+          Menü
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!-- <a class="dropdown-item" href="users.php">Dolgozók szerkesztése</a> -->
           <!-- <a class="dropdown-item" href="addUser.php">Dogozók hozzáadása</a> -->
           <a class="dropdown-item" href="kilepett.php">Kiléptetett Dolgozók</a>
           <a class="dropdown-item" href="osszesito.php">Összesítő</a>
-          <!-- <a class="dropdown-item" href=""><span class="badge badge-danger">Ózd</span></a> -->
+          
         </div>
       </li> 
       <li class="nav-item dropdown">
@@ -24,11 +24,11 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <!-- <a class="dropdown-item" href="kilepesiAdatok.php">Kilépési adatok</a> -->
-          <a class="dropdown-item" href="meddigMaradt.php">Mikor jött / Mikor ment ?</a>
+          <a class="dropdown-item" href="meddigMaradt.php">Átlagos maradási idő</a>
           <a class="dropdown-item" href="igenyValtozasok.php">Igény Változások</a>
-          <a class="dropdown-item" href="haviDolgozok.php">A hónapban be és kilépett dolgozók</a>
           <a class="dropdown-item" href="kolcsonzok.php">Kölcsönzőcégek megoszlása</a>
-          <a class="dropdown-item" href="fluktuacio.php">Havi Fluktuáció</a>
+          <a class="dropdown-item" href="haviDolgozok.php">Fluktuáció és belépés fő-ben (havi)</a>
+          <a class="dropdown-item" href="fluktuacio.php">Fluktuácó %-ban (havi)</a>
         </div>
       </li>
     </ul>
@@ -55,7 +55,6 @@
         nev: nev
       },
       success: function(Result){
-        //alert(Result)
         $('#valasz').html(Result)
         $('#alert').show()
         

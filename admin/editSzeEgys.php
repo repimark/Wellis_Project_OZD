@@ -41,20 +41,20 @@ if (!isset($_SESSION["a_id"])) {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Terület hozzáadása</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Szervezeti egység hozzáadása</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
 						<form>
-							<label class="form-group" for="terulet">Terület</label>
-							<input type="text" name="terulet" id="newTerulet" class="form-control">
+							<label class="form-group" for="#newSZE">Szervezeti egység</label>
+							<input type="text" name="terulet" id="newSZE" class="form-control">
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
-						<button type="button" class="btn btn-primary addTerulet">Mentés</button>
+						<button type="button" class="btn btn-primary addSZE">Mentés</button>
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@ if (!isset($_SESSION["a_id"])) {
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Terület törlése</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Szervezeti egység törlése</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
@@ -74,51 +74,52 @@ if (!isset($_SESSION["a_id"])) {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Mégsem</button>
-						<button type="button" class="btn btn-primary deleteTerulet" id="deleteBtn">Törlés</button>
+						<button type="button" class="btn btn-primary deleteSZE" id="deleteBtn">Törlés</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		</div>
 		<script type="text/javascript">
-			$('.addTerulet').click(function() {
-				var ter = $('#newTerulet').val()
+			$('.addSZE').click(function() {
+				var egys = $('#newSZE').val()
 				//alert(ter)
 				$.ajax({
-					url: 'php/addTerulet.php',
+					url: 'php/addSZE.php',
 					type: 'POST',
 					cache: false,
 					data: {
-						elnev: ter
+						elnev: egys
 					},
 					success: function(Result) {
-						location.reload()
-					},
-					error: function(errResult){
-						alert(errResult)
+						if (Result == 'Sikeres') {
+							location.reload()
+						} else {
+							alert('Sikertelen')
+						}
 					}
 				});
 			});
 			$('#deleteModal').on('show.bs.modal', function(event) {
 				var button = $(event.relatedTarget) // Button that triggered the modal
-				var ter = button.data('terulet') // Extract info from data-* attributes
+				var sze = button.data('id') // Extract info from data-* attributes
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 				var modal = $(this)
-				modal.find('#deleteBtn').data('terulet', ter)
+				modal.find('#deleteBtn').data('id', sze)
 				//modal.find('.modal-body input').val(recipient)
 			})
-			$('.deleteTerulet').click(function(event) {
+			$('.deleteSZE').click(function(event) {
 
-				var ter = $(this).data('terulet')
+				var egys = $(this).data('id')
 				//alert(ter)
 
 				$.ajax({
-					url: 'php/deleteTerulet.php',
+					url: 'php/deleteSZE.php',
 					type: 'POST',
 					cache: false,
 					data: {
-						t_id: ter
+						szt_id: egys
 					},
 					success: function(Result) {
 						if (Result == 'Sikeres') {
@@ -131,7 +132,7 @@ if (!isset($_SESSION["a_id"])) {
 			});
 			var deleteItem = function(terulet) {
 				$.ajax({
-					url: 'php/deleteTerulet.php',
+					url: 'php/deleteSZE.php',
 					type: 'POST',
 					cache: false,
 					data: {
@@ -148,16 +149,16 @@ if (!isset($_SESSION["a_id"])) {
 			};
 			$('.container').ready(function() {
 				var lines = []
-				lines += '<li class="list-group-item add"><button data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Terület hozzáadása</button></li>';
+				lines += '<li class="list-group-item add"><button onclick="add()" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Szervezeti egység hozzáadása</button></li>';
 				$.ajax({
-					url: 'php/getTerulet.php',
+					url: 'php/getSZE.php',
 					type: 'POST',
 					cache: false,
 					success: function(Result) {
 						var objJSON = JSON.parse(Result);
 						//alert(Result)
 						for (i in objJSON) {
-							lines += '<li class="list-group-item" data-terulet="' + objJSON[i].t_id + '">' + objJSON[i].telnev + '   <button data-terulet="' + objJSON[i].t_id + '" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
+							lines += '<li class="list-group-item" data-id="' + objJSON[i].szt_id + '">' + objJSON[i].szt_elnevezes + '   <button data-id="' + objJSON[i].szt_id + '" id="delBtn"  data-target="#deleteModal" data-toggle="modal" class="btn badge badge-danger">Törlés</button></li>'
 						}
 						//alert(lines)
 						$('#list').html(lines)
