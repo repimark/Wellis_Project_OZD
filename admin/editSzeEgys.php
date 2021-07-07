@@ -130,23 +130,23 @@ if (!isset($_SESSION["oa_id"])) {
 					}
 				});
 			});
-			var deleteItem = function(terulet) {
-				$.ajax({
-					url: 'php/deleteSZE.php',
-					type: 'POST',
-					cache: false,
-					data: {
-						t_id: terulet
-					},
-					success: function(Result) {
-						if (Result == 'Sikeres') {
-							location.reload()
-						} else {
-							alert('Sikertelen')
-						}
-					}
-				});
-			};
+			// var deleteItem = function(terulet) {
+			// 	$.ajax({
+			// 		url: 'php/deleteSZE.php',
+			// 		type: 'POST',
+			// 		cache: false,
+			// 		data: {
+			// 			t_id: terulet
+			// 		},
+			// 		success: function(Result) {
+			// 			if (Result == 'Sikeres') {
+			// 				location.reload()
+			// 			} else {
+			// 				alert('Sikertelen')
+			// 			}
+			// 		}
+			// 	});
+			// };
 			$('.container').ready(function() {
 				var lines = []
 				lines += '<li class="list-group-item add"><button onclick="add()" data-toggle="modal" data-target="#addModal" class="btn addNew"><span class="text-success">+</span>Új Szervezeti egység hozzáadása</button></li>';
