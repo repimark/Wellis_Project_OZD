@@ -9,7 +9,7 @@ if (!isset($_SESSION["oa_id"])) {
 <head>
 	<title>Wellis Admin oldal</title>
 	<?php include '../contents/links.php'; ?>
-	<style
+
 </head>
 <body>
 	<?php include '../contents/AdminNavbar.php'; ?>
