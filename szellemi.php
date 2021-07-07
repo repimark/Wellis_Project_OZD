@@ -324,12 +324,9 @@ if (!isset($_SESSION["ou_id"])) {
                 var lejart = []
                 $.ajax({
                     url: 'szellemi/getSzellemi.php',
-                    type: 'POST',
-                    data: {
-
-                    },
+                    type: 'GET',
                     success: function(res) {
-                        console.log(res)
+                       
                         var obj = JSON.parse(res)
 
                         for (i in obj) {
@@ -362,7 +359,7 @@ if (!isset($_SESSION["ou_id"])) {
                         datum: datum
                     },
                     success: function(res) {
-                        //console.log(res)
+                        
                         location.reload();
                     },
                     error: function(errorRes) {
@@ -424,7 +421,7 @@ if (!isset($_SESSION["ou_id"])) {
                         datum: datum
                     },
                     success: function(res){
-                        console.log(res);
+                        
                         location.reload();
                         //alert(res)
                     },
@@ -435,7 +432,7 @@ if (!isset($_SESSION["ou_id"])) {
             })
             var hatarIdoDatum = function(kezdes) {
                 var d = new Date(kezdes)
-                //console.log(d.getFullYear() + '.' + (d.getMonth()+1)+'.'+d.getDate())
+               
                 d.setDate(d.getDate() + 45)
                 var today = new Date()
                 var tod = (today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate())
@@ -467,7 +464,7 @@ if (!isset($_SESSION["ou_id"])) {
 
                     },
                     success: function(res) {
-                        //console.log(res)
+                        
                         var obj = JSON.parse(res)
                         for (i in obj) {
                             adat.push(parseInt(obj[i].db))
