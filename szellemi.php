@@ -329,6 +329,7 @@ if (!isset($_SESSION["ou_id"])) {
 
                     },
                     success: function(res) {
+                        console.log(res)
                         var obj = JSON.parse(res)
 
                         for (i in obj) {
