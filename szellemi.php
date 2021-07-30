@@ -311,7 +311,8 @@ if (!isset($_SESSION["ou_id"])) {
                     },
                     success: function(res) {
                         //alert(res)
-                        location.reload()
+                        loadKereses()
+                        $('#addModal').modal('hide')
                     },
                     error: function(errorRes) {
                         alert(errorRes)
@@ -324,9 +325,11 @@ if (!isset($_SESSION["ou_id"])) {
                 var lejart = []
                 $.ajax({
                     url: 'szellemi/getSzellemi.php',
-                    type: 'GET',
+                    type: 'POST',
+                    data: {
+
+                    },
                     success: function(res) {
-                       
                         var obj = JSON.parse(res)
 
                         for (i in obj) {
@@ -348,7 +351,9 @@ if (!isset($_SESSION["ou_id"])) {
                         $('#kesz').html(kesz)
                         $('#lejart').html(lejart)
                     }
+                    
                 });
+                chartLoad()
             }
             var lejartraJelent = function(id, datum) {
                 $.ajax({
@@ -359,8 +364,8 @@ if (!isset($_SESSION["ou_id"])) {
                         datum: datum
                     },
                     success: function(res) {
-                        
-                        location.reload();
+                        //console.log(res)
+                        loadKereses();
                     },
                     error: function(errorRes) {
                         console.log(errorRes)
@@ -378,7 +383,7 @@ if (!isset($_SESSION["ou_id"])) {
                         datum: today
                     },
                     success: function(res) {
-                        location.reload()
+                       loadKereses()
                     },
                     error: function(errorRes) {
                         console.log(res)
@@ -393,7 +398,7 @@ if (!isset($_SESSION["ou_id"])) {
                         id: id
                     },
                     success: function(res) {
-                        location.reload()
+                        loadKereses()
                     },
                     error: function(errRes) {
                         alert(errorRes)
@@ -421,8 +426,9 @@ if (!isset($_SESSION["ou_id"])) {
                         datum: datum
                     },
                     success: function(res){
-                        
-                        location.reload();
+                        console.log(res);
+                        loadKereses();
+                        $('#editModal').modal('hide')
                         //alert(res)
                     },
                     error: function(errorRes){
@@ -432,7 +438,7 @@ if (!isset($_SESSION["ou_id"])) {
             })
             var hatarIdoDatum = function(kezdes) {
                 var d = new Date(kezdes)
-               
+                //console.log(d.getFullYear() + '.' + (d.getMonth()+1)+'.'+d.getDate())
                 d.setDate(d.getDate() + 45)
                 var today = new Date()
                 var tod = (today.getFullYear() + '.' + (today.getMonth() + 1) + '.' + today.getDate())
@@ -464,7 +470,7 @@ if (!isset($_SESSION["ou_id"])) {
 
                     },
                     success: function(res) {
-                        
+                        //console.log(res)
                         var obj = JSON.parse(res)
                         for (i in obj) {
                             adat.push(parseInt(obj[i].db))
