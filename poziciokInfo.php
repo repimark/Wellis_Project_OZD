@@ -863,8 +863,8 @@ if (!isset($_SESSION["ou_id"])) {
 							d_id: dolgozo_id
 						},
 						success: function(res) {
-							console.log(res)
-							//location.reload()
+							// console.log(res)
+							location.reload()
 						},
 						error: function(errorRes) {
 							console.log(errorRes)
@@ -879,8 +879,8 @@ if (!isset($_SESSION["ou_id"])) {
 							d_id: dolgozo_id
 						},
 						success: function(res) {
-							console.log(res)
-							//location.reload()
+							// console.log(res)
+							location.reload()
 						},
 						error: function(errorRes) {
 							console.log(errorRes)
