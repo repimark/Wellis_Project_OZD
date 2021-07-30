@@ -864,7 +864,7 @@ if (!isset($_SESSION["ou_id"])) {
 						},
 						success: function(res) {
 							console.log(res)
-							location.reload()
+							//location.reload()
 						},
 						error: function(errorRes) {
 							console.log(errorRes)
