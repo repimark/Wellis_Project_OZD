@@ -851,7 +851,7 @@ if (!isset($_SESSION["ou_id"])) {
 
 			});
 			$('#remove_button').click(function() {
-				var button = $(this)
+				var button = $('#remove_button')
 				var dolgozo_id = button.data('id')
 				var pozicio_id = button.data('pozicio')
 				if ($('#kilepo').is(':checked')) {
